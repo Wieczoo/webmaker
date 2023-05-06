@@ -1,0 +1,18 @@
+div#ap {
+    background: rgb(245,245,245);
+    width: calc(100%);
+    height: calc(100vh - 80px);
+    display: flex;
+}
+h2
+{
+    margin-bottom: 20px;
+}
+
+.RigthPanel{
+    width: 100px;
+    background-color: white;
+    height: 100vh;
+    margin-left: auto;
+}
+
