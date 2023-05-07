@@ -43,7 +43,8 @@ namespace WebBuilderBackend.Controllers
                         audience: ConfigurationManager.AppSetting["JWT:ValidAudience"],
                         claims: new List<Claim>() {
                          new Claim(ClaimTypes.Name,login.Email),
-                         new Claim(ClaimTypes.Role,"Admin")
+                         new Claim(ClaimTypes.Role,user.Role),
+                         new Claim("Role",user.Role)
                         },
                         expires: DateTime.Now.AddMinutes(6),
                         signingCredentials: signinCredentials

@@ -8,6 +8,7 @@ import Pages from "./pages/dashboard/pages";
 import Apperance from "./pages/dashboard/apperance";
 import Settings from "./pages/dashboard/settings";
 import Profile from "./pages/dashboard/profile";
+import UserHome from "./pages/home/login";
 
 import './styles/main.css';
 
@@ -18,6 +19,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login/>}/>
+          <Route path="home" element={<UserHome/>}/>
           <Route path="register" element={<Register/>}/>
           <Route path="dashboard" element={<Layout/>}>
             <Route path="home" element ={<Home/>}/>
