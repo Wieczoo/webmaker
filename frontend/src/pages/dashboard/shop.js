@@ -1,25 +1,34 @@
 import React from 'react';
-import Card from './../../assets/card';
 
 import '../../styles/shop.css';
-
 export default function Shop() {
   return (
       <>
       <h2>Shop</h2>
-      <>
-      <h2>Zakupione zasoby</h2>
-      <div className='productContainer'>
-      <Card name='Produkt 1'></Card>
-      <Card name='Produkt 2'></Card>
-      <Card name='Produkt 3'></Card>
-      <Card name='Produkt 4'></Card>
-      <Card name='Produkt 5'></Card>
-      <Card name='Produkt 5'></Card>
+      <div id='templates'>
+        <div class='template-row'>
+          <header>Free templates</header>
+          <div class='template-content'>
+            <div class='template'>
+              <div class='preview'></div>
+              <div class='price'>0 PLN</div>
+              <button>Buy template</button>
+            </div>
+          </div>
+        </div>
+
+        <div class='template-row'>
+          <header>Payed templates</header>
+          <div class='template-content'>
+            <div class='template'>
+              <div class='preview'></div>
+              <div class='price'>49.99 PLN</div>
+              <button>Buy template</button>
+            </div>
+          </div>
+        </div>
       </div>
-      </>
+
       </>
   );
 }
-
-  

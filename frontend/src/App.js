@@ -7,8 +7,7 @@ import Shop from "./pages/dashboard/shop";
 import Pages from "./pages/dashboard/pages";
 import Apperance from "./pages/dashboard/apperance";
 import Settings from "./pages/dashboard/settings";
-import Page1 from "./pages/dashboard/page1";
-import Page2 from "./pages/dashboard/page2";
+import Profile from "./pages/dashboard/profile";
 
 import './styles/main.css';
 
@@ -20,14 +19,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Login/>}/>
           <Route path="register" element={<Register/>}/>
-          <Route path="page1" element={<Page1/>}/>
-          <Route path="page2" element={<Page2/>}/>
           <Route path="dashboard" element={<Layout/>}>
             <Route path="home" element ={<Home/>}/>
             <Route path="shop" element ={<Shop/>}/>
             <Route path="pages" element ={<Pages/>}/>
             <Route path="apperance" element ={<Apperance/>}/>
             <Route path="settings" element ={<Settings/>}/>
+            <Route path="profile" element ={<Profile/>}/>
           </Route>
         </Routes>
       </Router>

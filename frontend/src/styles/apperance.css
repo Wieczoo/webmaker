@@ -1,18 +1,137 @@
 div#ap {
-    background: rgb(245,245,245);
+    background: rgb(250,250,250);
     width: calc(100%);
     height: calc(100vh - 80px);
+    display: block;
     display: flex;
 }
 h2
 {
     margin-bottom: 20px;
 }
-
-.RigthPanel{
-    width: 100px;
-    background-color: white;
-    height: 100vh;
-    margin-left: auto;
+div#ap div.bar
+{
+    background: rgb(235,235,235);
+}
+div#ap div.side:nth-child(1)
+{
+    width: 15%;
+    height: 100%;
+}
+div#ap div.side:nth-child(2)
+{
+    width: 65%;
+    height: 100%;
+    box-sizing: border-box;
+}
+div#ap div.side:nth-child(3)
+{
+    width: 20%;
+    height: 100%;
 }
 
+.header
+{
+    width: 100%;
+    height: 60px;
+    
+    border-right: 1px solid rgb(210,210,210);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button
+{
+    /* border: 1px solid rgba(31,8,8,.2); */
+    text-align: center;
+    border: 0;
+    /* padding: 5px 8px; */
+    box-sizing: border-box;
+    width: auto;
+    outline: 0;
+    cursor: pointer;
+    display: flex;
+    background: transparent;
+}
+
+button:hover
+{
+    background: rgb(210,210,210);
+}
+
+
+button img
+{
+    height: 30px;
+    width: 30px;
+    position: relative;
+    padding: 5px;
+}
+
+#tree
+{
+    margin-top: 60px;
+    border-top: 1px solid rgb(210,210,210);
+}
+#tree span
+{
+    padding: 5px 8px;
+    display: block;
+}
+
+
+#selected-element
+{
+    width: 100%;
+    height: 60px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background: rgb(190,190,190);
+    box-sizing: border-box;
+}
+
+.option-section
+{
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.option-section header
+{
+    height: 30px;
+    width: 100%;
+    background: rgb(200,200,200);
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.option-section .options
+{
+    height: 200px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.option-section .options span
+{
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.option-section .options span label
+{
+    width: 20%;
+}
+
+.option-section .options span input
+{
+    width: 70%;
+    margin-left: 10%;
+}

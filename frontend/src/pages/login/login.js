@@ -12,8 +12,7 @@ const navigate = useNavigate();
           <input type='password' placeholder='password'></input>
           <button onClick={() => navigate('dashboard')}>Login</button>
           <button onClick={() => navigate('register')}>Register</button>
-          <button onClick={() => navigate('dashboard')}>Zaloguj jako admin</button>
-          <button onClick={() => navigate('dashboard')}>Zaloguj jako użytkownik</button>
+
       </form>
       </>
   );
