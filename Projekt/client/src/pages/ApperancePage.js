@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {useNavigate,useLocation } from "react-router-dom";
+import {useNavigate,useLocation} from "react-router-dom";
 
 import '../styles/editor.css';
 
@@ -71,7 +71,7 @@ const ApperancePage = () =>{
         </div>
         }
             <header>Apperance editor</header>
-            <section>
+            <section id="editorSection">
                 <div className="editorColumn">
                     <div id="editorHeader">
                     <span>
