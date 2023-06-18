@@ -1,0 +1,321 @@
+section
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 0;
+    background:#404040;
+
+}
+.editorColumn:first-child
+{
+    width: 80%;
+    min-width: 80%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.editorColumn:last-child
+{
+    width: 20%;
+    min-width: 20%;
+    height: 100%;
+    border-left: 1px solid rgba(0,0,0,.25);
+    box-sizing: border-box;
+}
+
+#editorHeader
+{
+    width: 100%;
+    height: 40px;
+    position: relative;
+    display: flex;
+    background: #f5f5f5;
+    border-bottom: 1px solid rgba(0,0,0,.25);
+}
+#editorSelector
+{
+    width: 20%;
+    min-width: 20%;
+    height: 100%;
+    background: #f5f5f5;
+    border-right: 1px solid rgba(0,0,0,.25);
+    box-sizing: border-box;
+}
+#editorDisplay
+{
+    background: transparent;
+    width: 80%;
+    min-width: 80%;
+    height: 100%;
+    position: relative;
+}
+#editorHeader span
+{
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#editorHeader span:first-child{
+    width: 20%;
+    box-sizing: border-box;
+    border-right: 1px solid rgba(0,0,0,.25);
+   
+}
+#editorHeader span:last-child{
+    width: 80%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+#editorHeader span #editorView
+{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+} 
+#editorHeader span #editorView button
+{
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+#editorHeader span #editorView img
+{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    filter:invert(0.3);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+#editorHeader span button
+{
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+} 
+#editorHeader span button img
+{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    filter:invert(0.3);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+#editorOptions
+{
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#editorOptions span
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#editorOptions h3
+{
+    height: 40px;
+    line-height: 40px;
+}
+#editorSelectorHeader
+{
+    width: 100%;
+    height: 40px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,.25);
+    box-sizing: border-box;
+    padding: 5px;
+}
+#editorSelectorHeader h3
+{
+    margin-bottom: 0;
+}
+#editorSelectorHeader span button
+{
+    width: 30px;
+    height: 30px;
+    position: relative;
+    border: 0;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+
+}
+#editorSelectorHeader span button img
+{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 50%;
+    left: 50%;
+    filter: invert(0.3);
+    transform: translate(-50%,-50%);
+}
+
+
+#overlay
+{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.75);
+    backdrop-filter: blur(3px);
+    z-index: 100;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#editorSelectorBody
+{
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.page
+{
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border: 0;
+    outline: none;
+    background: transparent;
+}
+.page img
+{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    filter:invert(0.3);
+}
+#overlay #modalBox
+{
+    background: white;
+    width: 20%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+#overlay #modalBox #modalBoxHeader
+{
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 5px;
+    border-bottom: 1px solid rgba(0,0,0,.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#overlay #modalBox #modalBoxHeader button
+{
+    width: 30px;
+    height: 30px;
+    position: relative;
+    border: 0;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+
+}
+#overlay #modalBox #modalBoxHeader button img
+{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 50%;
+    left: 50%;
+    filter: invert(0);
+    transform: translate(-50%,-50%);
+}
+
+#overlay #modalBox #modalBoxBody
+{
+    padding: 5px;
+    position: relative;
+    height: calc(100% - 40px);
+}
+#overlay #modalBox #modalBoxBody label
+{
+    font-size: 14px;
+    color: #404040;
+}
+#overlay #modalBox #modalBoxBody input 
+{
+    width: calc(100%);
+    border: 1px solid rgba(0,0,0,.25);
+    border-radius: 10px;
+    height: 30px;
+    padding: 5px 10px;
+    float: left;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#overlay #modalBox #modalBoxBody button
+{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    text-align: center;
+    color: white;
+    background:#FE735C;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    margin-top: 10px;
+    outline: none;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+
+#roll
+{
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+    border-radius: 50%;
+    background: #f5f5f5;
+    border: 1px solid rgba(0,0,0,.25);
+    transform: translate(-50%,-50%);
+    transition: .3s;
+}

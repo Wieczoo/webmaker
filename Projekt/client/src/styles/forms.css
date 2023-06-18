@@ -1,0 +1,143 @@
+.form
+{
+    box-sizing: border-box;
+    height: 60%;
+    width: 60%;
+    background:white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    border-bottom: 1px solid #ccc;
+}
+.form .formRow
+{
+    width: 100%;
+    display: flex;
+}
+.form .formRow:first-child
+{
+    height: 80%;
+}
+.form .formRow:last-child
+{
+    height: 20%;
+}
+.form .formRow .formRowColumn
+{
+    height: 100%;
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form .formRow .formRowColumn span:not(.agreement)
+{
+    width: 60%;
+    position: relative;
+    height: 30px;
+    margin-bottom: 10px;
+}
+.form .formRow .formRowColumn span:not(.agreement) input
+{
+    width: calc(100%);
+    border: 1px solid rgba(0,0,0,.25);
+    border-radius: 10px;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    padding-left: 25px;
+    outline: none;
+}
+.form .formRow .formRowColumn span:not(.agreement) input:focus {
+    border: 2px solid #FE735C;
+  }
+.form .formRow .formRowColumn h2
+{
+    width: 60%;
+    text-align: left;
+    margin-bottom: 20px;
+    
+}
+.form .formRow .formRowColumn button{
+    text-align: center;
+    color: white;
+    background:#FE735C;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    margin-top: 10px;
+    outline: none;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+.form .formRow .formRowColumn button:hover
+{
+    background: #CD4F40;
+}
+.form .formRow .formRowColumn span:not(.agreement) img:not(#ilustration,.iconMedia)
+{
+    width: 15px;
+    height: 15px;
+    filter: invert(0.2);
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.form .formRow .formRowColumn  #ilustration
+{
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    object-fit: cover;
+}
+
+.link
+{
+    text-decoration: underline;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.form .formRow:last-child .formRowColumn:last-child span
+{
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    width: auto;
+    margin-bottom: 0px;
+}
+
+.form .formRow:last-child .formRowColumn:last-child span img
+{
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.form .formRow:last-child .formRowColumn:last-child span img:hover
+{
+    filter: invert(50%) sepia(92%) saturate(2321%) hue-rotate(330deg) brightness(121%) contrast(99%);
+}
+
+
+.agreement 
+{
+    width: 60%;
+}
+.agreement a
+{
+    margin-left: 5px;
+}
