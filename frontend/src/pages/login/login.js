@@ -22,6 +22,12 @@ export default function Login() {
          
           localStorage.setItem("user", JSON.stringify(response.data));
           console.log(response.data);
+          const decoded = jwt_decode(response.data);
+          if( decoded.Role == 'User') {
+            navigate('user');
+          } else if (decoded.Role == 'Admin'){
+            navigate('dashboard');
+          }
         }
 
         return response.data;

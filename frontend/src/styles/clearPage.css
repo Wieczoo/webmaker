@@ -1,0 +1,28 @@
+
+
+.ClearPageHeader {
+    width: 100%;
+}
+
+.ClearPageHeader div {
+    width: 100%!important;
+    box-sizing: border-box;
+}
+
+.ClearPageFooter {
+    width: 100%;
+}
+.ClearPageFooter div {
+    width: 100%!important;
+    box-sizing: border-box;
+}
+
+.ClearPageContent {
+    display: flex;
+    flex-direction: row;
+}
+
+.ClearPageContent div{
+     width: 50%!important;
+     box-sizing: border-box;
+}

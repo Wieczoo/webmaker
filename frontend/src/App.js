@@ -9,7 +9,7 @@ import Apperance from "./pages/dashboard/apperance";
 import Settings from "./pages/dashboard/settings";
 import Profile from "./pages/dashboard/profile";
 import UserHome from "./pages/home/login";
-
+import ClearPage from "./pages/dashboard/clearPage";
 import './styles/main.css';
 
 function App() {
@@ -28,7 +28,9 @@ function App() {
             <Route path="apperance" element ={<Apperance/>}/>
             <Route path="settings" element ={<Settings/>}/>
             <Route path="profile" element ={<Profile/>}/>
+          
           </Route>
+          <Route path="clearPage" element ={<ClearPage/>}/>
         </Routes>
       </Router>
     </div>
