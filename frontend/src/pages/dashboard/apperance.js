@@ -8,6 +8,7 @@ import icon_desktop from '../../assets/pictures/icons/monitor.png';
 import icon_mobile from '../../assets/pictures/icons/smartphone.png';
 import Example from '../../components/Example';
 import Creator from '../../components/Creator';
+import WebsiteCreator from  '../../components/WebsiteCreator';
 
 export default function Apperance() {
   const [elem, setElem] = useState([]);
@@ -42,10 +43,10 @@ export default function Apperance() {
             {/* <DndProvider backend={HTML5Backend}>
               <Example></Example>
             </DndProvider> */}
-           <DndProvider backend={HTML5Backend}>
+           {/* <DndProvider backend={HTML5Backend}>
       <Creator />
-    </DndProvider>
-          
+    </DndProvider> */}
+          <WebsiteCreator></WebsiteCreator>
           </div>
         </div>
         {/* <div class='side'>
@@ -55,12 +56,12 @@ export default function Apperance() {
           </div>
           
         </div> */}
-        <div class='bar side'>
-          <div id='selected-element'>Body</div>
-          <div class='option-section'>
+        {/* <div class='bar side'> */}
+          {/* <div id='selected-element'>Body</div> */}
+          {/* <div class='option-section'>
             <header>Selector &#8595;</header>
             <div class='options'>
-            <label for='id'>Id:</label>
+            <label for='id'>Id:</label> */}
             {/* <input type='text' name='id' onChange={(e) =>  {setValueText(e.target.value)}}></input>
             <button>Zmien</button> */}
               {/* <span>
@@ -72,19 +73,19 @@ export default function Apperance() {
                 <label for='class'>Class:</label>
                 <input type='text' name='class'></input>
               </span> */}
-            </div>
-          </div>
+            {/* </div>
+          </div> */}
 
-          <div class='option-section'>
+          {/* <div class='option-section'>
             <header>Layout &#8595;</header>
             <div class='options'></div>
-          </div>
+          </div> */}
 
-          <div class='option-section'>
+          {/* <div class='option-section'>
             <header>Size &#8595;</header>
             <div class='options'></div>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </div>
       </>
   );
