@@ -30,13 +30,15 @@ const LoginPage = () =>
             localStorage.setItem("user", JSON.stringify(response.data));
             const decoded = jwt_decode(response.data);
             if( decoded.Role == 'User') {
-              navigate('user');
+              navigate('dashboard');
             } else if (decoded.Role == 'Admin'){
               navigate('dashboard');
             }
           }
   
           return response.data;
+        }).catch((e) =>{
+            console.log(e)
         });
     }
 //https://localhost:7298/api/Authentication/Users
@@ -59,7 +61,7 @@ const LoginPage = () =>
               console.log(response.data);
               const decoded = jwt_decode(response.data);
               if( decoded.Role == 'User') {
-                navigate('user');
+                navigate('dashboard');
               } else if (decoded.Role == 'Admin'){
                 navigate('dashboard');
               }
@@ -74,7 +76,7 @@ const LoginPage = () =>
         if(token){
             const decoded = jwt_decode(token);
             if( decoded.Role == 'User') {
-                navigate('user');
+                navigate('dashboard');
             } else if (decoded.Role == 'Admin'){
                 navigate('dashboard');
             }
