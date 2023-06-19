@@ -52,7 +52,7 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
-builder.Services.AddDbContext<ApiContext>(options => options.UseSqlServer(@"Server=localhost; Database=webmaker; User Id=sa; Password=Testowe123!;TrustServerCertificate=true;"));
+builder.Services.AddDbContext<ApiContext>(options => options.UseSqlServer(@"Data Source=DESKTOP-UUNK63A;Initial Catalog=webmaker;Integrated Security=True; TrustServerCertificate=True;"));
 builder.Services.AddScoped<ICacheService, CacheService>();
 builder.Services.AddAuthentication(opt => {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -72,6 +72,12 @@ builder.Services.AddAuthentication(opt => {
 });
 
 
+builder.Services.AddAuthentication()
+               .AddGoogle(options =>
+               {
+                   options.ClientId = "396681354957-blcgk4ism4i4p9bj01rml8jlk4dusdhk.apps.googleusercontent.com";
+                   options.ClientSecret = "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";
+               });
 
 var app = builder.Build();
 
