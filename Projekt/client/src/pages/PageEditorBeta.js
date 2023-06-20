@@ -106,7 +106,7 @@ const PageEditor = () => {
     tempPages[source].elements.push(temp);
     setPages(tempPages);
   };
-
+// dodawanie tekstu
   const putText = () => {
     const temp = {
       type: 'text',
