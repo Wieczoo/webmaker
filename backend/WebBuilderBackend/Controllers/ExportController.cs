@@ -32,16 +32,16 @@ public class ExportController : ControllerBase
         }
 
         // Sprawdź, czy liczba elementów w tablicach Names i Htmls jest zgodna
-        if (exportData.Names.Length != exportData.Htmls.Length)
+        if (exportData.Name.Length != exportData.Html.Length)
         {
             return BadRequest("Invalid data: Names and Htmls arrays have different lengths");
         }
 
         // Iteruj przez tablice Names i Htmls
-        for (int i = 0; i < exportData.Names.Length; i++)
+        for (int i = 0; i < exportData.Name.Length; i++)
         {
-            string name = exportData.Names[i];
-            string htmlBase64 = exportData.Htmls[i];
+            string name = exportData.Name[i];
+            string htmlBase64 = exportData.Html[i];
 
             // Dekoduj HTML z Base64
             byte[] htmlBytes = Convert.FromBase64String(htmlBase64);
