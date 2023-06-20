@@ -86,7 +86,12 @@ namespace WebBuilderBackend.Controllers
                         claims: new List<Claim>() {
                     new Claim(ClaimTypes.Name, user.Email),
                     new Claim(ClaimTypes.Role, existingUser.Role),
+<<<<<<< HEAD
                     new Claim("Role", existingUser.Role)
+=======
+                    new Claim("Role", existingUser.Role),
+                 new Claim("Email", existingUser.Email)
+>>>>>>> ea35ce5960c1815adadb8bbbfe0950c82abaae42
                         },
                         expires: DateTime.Now.AddMinutes(6),
                         signingCredentials: signinCredentials
@@ -112,7 +117,12 @@ namespace WebBuilderBackend.Controllers
                     claims: new List<Claim>() {
                 new Claim(ClaimTypes.Name, newUser.Email),
                 new Claim(ClaimTypes.Role, newUser.Role),
+<<<<<<< HEAD
                 new Claim("Role", newUser.Role)
+=======
+                new Claim("Role", newUser.Role),
+                 new Claim("Email", newUser.Email)
+>>>>>>> ea35ce5960c1815adadb8bbbfe0950c82abaae42
                     },
                     expires: DateTime.Now.AddMinutes(6),
                     signingCredentials: signinCredentials
@@ -125,4 +135,8 @@ namespace WebBuilderBackend.Controllers
         }
 
     }
+<<<<<<< HEAD
 }
+=======
+ }
+>>>>>>> ea35ce5960c1815adadb8bbbfe0950c82abaae42
