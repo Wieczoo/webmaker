@@ -15,6 +15,9 @@ import PagesPage from "./pages/PagesPage";
 import ApperancePage from "./pages/ApperancePage";
 import ProfilePage from "./pages/ProfilePage";
 
+
+import PageEditor from "./pages/PageEditorBeta";
+
 const App = () =>{
     return(
         <>
@@ -29,6 +32,7 @@ const App = () =>{
                             <Route path="pages" element ={<PagesPage/>}/>
                             <Route path="editor" element ={<ApperancePage/>}/>
                             <Route path="profile" element ={<ProfilePage/>}/>
+                            <Route path="beta" element ={<PageEditor/>}/>
                         </Route>
                     </Routes>
                 </Router>
