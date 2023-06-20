@@ -1,0 +1,118 @@
+#editorPage
+{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: #444;
+}
+
+#editorPage #editor
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#editorPage #options
+{
+    width: 300px;
+    min-width: 300px;
+    height: 100%;
+    background: white;
+
+} 
+
+#editorPage #editor #editorHeader
+{
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    background: white;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0, 0, 0,0.25);
+}
+
+#editorPage #editor #editorBody
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+#editorPage #editor #editorBody #editorSelector
+{
+    width: 200px;
+    min-width: 200px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-right: 1px solid rgba(0, 0, 0,0.25);
+
+}
+
+
+#editorPage #editor #editorBody #editorSelector #editorSelectorHeader
+{
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    background: white;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0, 0, 0,0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#editorPreview
+{
+    width: calc(100% - 200px);
+    height: 100%;
+    padding:10px 10px 0 10px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+#editorSelectorBody
+{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+#editorSelectorBody .section
+{
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+#editorSelectorBody .section h3
+{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    padding: 5px;
+    box-sizing: border-box;
+    background: #f5f5f5;
+}
+
+#pagePreviewBody
+{
+    min-width: 100%;
+    height: 100%;
+}
+
+.selectedElement {
+    border: 2px solid red;
+  }
+
+  .selectedText {
+    border: 2px solid blue;
+    /* Add any other desired styles */
+  }
+  .editorElement.selectedElement,
+.editorText.selectedText {
+  border: 2px solid red;
+}
