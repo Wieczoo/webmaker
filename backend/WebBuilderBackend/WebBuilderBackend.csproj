@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>b098dba5-6b5f-4578-99a1-7ef56e666c62</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,8 @@
     <PackageReference Include="StackExchange.Redis" Version="2.6.104" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.18" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,5 +40,10 @@
     <Folder Include="Data\" />
     <Folder Include="Service\" />
     <Folder Include="Cache\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\" />
+    <Content Remove="wwwroot\piettia320%40gmail.com\test.html" />
   </ItemGroup>
 </Project>

@@ -13,7 +13,10 @@ using Microsoft.AspNetCore.Identity;
 using WebBuilderBackend.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
+
+builder.Services.AddHttpClient();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -72,10 +75,15 @@ builder.Services.AddAuthentication(opt => {
 });
 
 
+builder.Services.AddAuthentication()
+               .AddGoogle(options =>
+               {
+                   options.ClientId = "396681354957-blcgk4ism4i4p9bj01rml8jlk4dusdhk.apps.googleusercontent.com";
+                   options.ClientSecret = "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";
+               });
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
+builder.Services.AddHttpClient();// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -83,7 +91,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 

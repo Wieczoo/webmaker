@@ -14,6 +14,7 @@ import ShopPage from "./pages/ShopPage";
 import PagesPage from "./pages/PagesPage";
 import ApperancePage from "./pages/ApperancePage";
 import ProfilePage from "./pages/ProfilePage";
+import Payment from "./pages/Payment";
 
 const App = () =>{
     return(
@@ -29,6 +30,7 @@ const App = () =>{
                             <Route path="pages" element ={<PagesPage/>}/>
                             <Route path="editor" element ={<ApperancePage/>}/>
                             <Route path="profile" element ={<ProfilePage/>}/>
+                            <Route path="payment" element ={<Payment/>}/>
                         </Route>
                     </Routes>
                 </Router>

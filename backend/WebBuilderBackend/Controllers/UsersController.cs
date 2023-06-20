@@ -38,9 +38,12 @@ namespace WebBuilderBackend.Controllers
             _context.SaveChanges();
             return new JsonResult(Ok(user));
         }
+
+       
+
         // GET: api/values
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public JsonResult GetAll()
         {
             var result = _context.Users.ToList();
