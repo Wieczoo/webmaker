@@ -450,7 +450,7 @@ const addPageView = () =>{
             </div>
             <div id="modalBoxBody">
               <label>Title</label>
-              <input type='text' onChange={(e) => { setNewPageTitle(e.target.value) }} />
+              <input data-testid='input_add_title' type='text' onChange={(e) => { setNewPageTitle(e.target.value) }} />
               <button onClick={addPage}>Add page</button>
             </div>
           </div>
@@ -542,13 +542,13 @@ const redirectToPreview = () =>{
   {!editorSelectorView ? (
     <div className="section">
       <h3>My pages
-        <button onClick={() => {setNewPageBlock(true);console.log(newPageBlock)}}><img alt='add' src={icon_addPage} /></button>
+        <button data-testid='add_button' onClick={() => {setNewPageBlock(true);console.log(newPageBlock)}}><img alt='add' src={icon_addPage} /></button>
       </h3>
     
       {pages !== null ? (
         pages.map((item, index) => (
             <div key={index} className='pageList'>
-                <button  onClick={() => openPage(item)}>
+                <button data-testid='new_page_test'  onClick={() => openPage(item)}>
                     {item.title}
                 </button>
                 <button className='pageOption' onClick={redirectToPreview}>

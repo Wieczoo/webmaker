@@ -1,0 +1,32 @@
+import {fireEvent, render, screen} from '@testing-library/react'
+import '@testing-library/jest-dom'
+import PageEditorBeta from './../pages/PageEditorBeta';
+import { waitFor } from '@testing-library/react'
+
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+   useNavigate: () => jest.fn(),
+ }));
+
+test('adding new page to dashboard',async()=>{
+
+    render(
+        <PageEditorBeta/>
+    );
+    await waitFor(() => {
+        fireEvent.click(screen.getByTestId('add_button'));
+    })
+    
+    await waitFor(() => {
+        expect(screen.getByText("Add page")).toBeInTheDocument();
+        fireEvent.change(screen.getByTestId("input_add_title"),{target: { value: "New test page" }});
+        expect(screen.getByTestId('input_add_title').value).toBe("New test page");
+        fireEvent.click(screen.getByText('Add page'));
+    })
+
+    await waitFor(() => {
+        expect(screen.getByTestId('new_page_test')).toHaveTextContent("New test page");
+    })
+   
+
+})
