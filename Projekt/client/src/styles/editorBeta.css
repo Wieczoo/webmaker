@@ -22,6 +22,7 @@
     border-left: 1px solid rgba(0,0,0,.25);
     box-sizing: border-box;
     padding: 5px;
+    overflow-y: scroll;
 } 
 #editorPage #options label{
     display: block;
@@ -42,6 +43,24 @@
     outline: none;
     margin-top: 3px;
     margin-bottom: 5px;
+}
+.labelVariation div
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+}
+.labelVariation div label
+{
+    text-align: center;
+    margin-right: 5px;
+    font-size: 11px!important;
+    color: rgba(120,121,122)!important;
+}
+.labelVariation div label:last-of-type
+{
+    margin-right: 0;
 }
 #editorPage #editor #editorHeader
 {
@@ -104,7 +123,7 @@
     height: 100%;
     flex-direction: column;
 }
-
+/* s */
 #editorSelectorBody .section
 {
     height: 100%;
@@ -191,6 +210,7 @@
     justify-content: center;
     align-items: center;
     flex: 40%;
+    align-self: flex-start;
 }
 
 .addButton img
@@ -203,6 +223,7 @@
 {
     display: flex;
     flex-wrap: wrap;
+    flex-grow: none;
 }
 .pageList
 {
