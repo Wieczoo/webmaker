@@ -20,6 +20,7 @@ const LoginPage = () =>
     const API_URL = "https://localhost:7298/api/Authentication/login";
 
     const login = ()=> {
+        console.log("NET:")
         axios.post(API_URL, {
           "email": username,
           "password":password
@@ -27,8 +28,10 @@ const LoginPage = () =>
         .then(response => {
           console.log(response);
           if (response.data.token) {
-            localStorage.setItem("user", JSON.stringify(response.data));
-            const decoded = jwt_decode(response.data);
+            localStorage.setItem("token", JSON.stringify(response.data));
+            const decoded = jwt_decode(response.data,{header: false});
+            debugger;
+            localStorage.setItem("token", decoded);
             if( decoded.Role == 'User') {
               navigate('dashboard');
             } else if (decoded.Role == 'Admin'){
@@ -41,10 +44,15 @@ const LoginPage = () =>
             console.log(e)
         });
     }
+    
+
 //https://localhost:7298/api/Authentication/Users
     function handleCallbackResponse(response){
         //console.log("Token:" + response.credential)
-        const decodeToken = jwt_decode(response.credential);
+        
+        console.log("Token:" + response.credential)
+        const decodeToken = jwt_decode(response.credential,{header: false});
+       
         console.log(decodeToken)
         axios.post("https://localhost:7298/api/Authentication/Users",{
             Id: 0,
@@ -56,29 +64,29 @@ const LoginPage = () =>
         }).then(response => {
             console.log(response);
             if (response.data.token) {
-             
-              localStorage.setItem("user", JSON.stringify(response.data));
-              console.log(response.data);
-              const decoded = jwt_decode(response.data);
+              localStorage.setItem("token", JSON.stringify(response.data.token));
+              const decoded = jwt_decode(response.data.token,{header: false});
+              debugger;
+              localStorage.setItem("role", decoded.Role);
+              localStorage.setItem("email", decoded.Email);
               if( decoded.Role == 'User') {
                 navigate('dashboard');
               } else if (decoded.Role == 'Admin'){
                 navigate('dashboard');
               }
             }
-    
             return response.data;
           });
     }
 
     useEffect(()=>{
-        const token = localStorage.getItem('user');
+        const token = localStorage.getItem('token');
         if(token){
             const decoded = jwt_decode(token);
             if( decoded.Role == 'User') {
-                navigate('dashboard');
+               // navigate('user');
             } else if (decoded.Role == 'Admin'){
-                navigate('dashboard');
+              //  navigate('dashboard');
             }
         }
         /* global google */

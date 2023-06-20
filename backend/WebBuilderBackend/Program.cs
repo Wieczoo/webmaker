@@ -52,7 +52,7 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
-builder.Services.AddDbContext<ApiContext>(options => options.UseSqlServer(@"Data Source=DESKTOP-UUNK63A;Initial Catalog=webmaker;Integrated Security=True; TrustServerCertificate=True;"));
+builder.Services.AddDbContext<ApiContext>(options => options.UseSqlServer(@"Server=localhost; Database=webmaker; User Id=sa; Password=Testowe123!;TrustServerCertificate=true;"));
 builder.Services.AddScoped<ICacheService, CacheService>();
 builder.Services.AddAuthentication(opt => {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

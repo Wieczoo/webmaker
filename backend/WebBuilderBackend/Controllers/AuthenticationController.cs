@@ -86,12 +86,7 @@ namespace WebBuilderBackend.Controllers
                         claims: new List<Claim>() {
                     new Claim(ClaimTypes.Name, user.Email),
                     new Claim(ClaimTypes.Role, existingUser.Role),
-<<<<<<< HEAD
                     new Claim("Role", existingUser.Role)
-=======
-                    new Claim("Role", existingUser.Role),
-                 new Claim("Email", existingUser.Email)
->>>>>>> ea35ce5960c1815adadb8bbbfe0950c82abaae42
                         },
                         expires: DateTime.Now.AddMinutes(6),
                         signingCredentials: signinCredentials
@@ -117,12 +112,73 @@ namespace WebBuilderBackend.Controllers
                     claims: new List<Claim>() {
                 new Claim(ClaimTypes.Name, newUser.Email),
                 new Claim(ClaimTypes.Role, newUser.Role),
-<<<<<<< HEAD
                 new Claim("Role", newUser.Role)
-=======
+                    },
+                    expires: DateTime.Now.AddMinutes(6),
+                    signingCredentials: signinCredentials
+                );
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+                return Ok(new JWTTokenResponse { Token = tokenString });
+            }
+
+            return Unauthorized();
+        }
+
+<<<<<<<<< Temporary merge branch 1
+        [HttpPost("Users")]
+        public IActionResult Users([FromBody] Users user)
+        {
+            if (user is null)
+            {
+                return BadRequest("Invalid user request!!!");
+            }
+
+            // Sprawdź, czy użytkownik o podanym adresie e-mail już istnieje w bazie danych
+            Users existingUser = _context.Users.SingleOrDefault(x => x.Email == user.Email);
+
+            if (existingUser != null)
+            {
+                if (user.Email == existingUser.Email && user.Password == existingUser.Password)
+                {
+                    // Użytkownik istnieje i dane logowania są poprawne
+
+                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSetting["JWT:Secret"]));
+                    var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                    var tokeOptions = new JwtSecurityToken(
+                        issuer: ConfigurationManager.AppSetting["JWT:ValidIssuer"],
+                        audience: ConfigurationManager.AppSetting["JWT:ValidAudience"],
+                        claims: new List<Claim>() {
+                    new Claim(ClaimTypes.Name, user.Email),
+                    new Claim(ClaimTypes.Role, existingUser.Role),
+                    new Claim("Role", existingUser.Role),
+                 new Claim("Email", existingUser.Email)
+                        },
+                        expires: DateTime.Now.AddMinutes(6),
+                        signingCredentials: signinCredentials
+                    );
+                    var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+                    return Ok(new JWTTokenResponse { Token = tokenString });
+                }
+            }
+            else
+            {
+                // Użytkownik nie istnieje, dodaj nowego użytkownika na podstawie danych przekazanych w parametrze
+
+                Users newUser = user;
+                user.Role = "User";
+                _context.Users.Add(newUser);
+                _context.SaveChanges();
+
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSetting["JWT:Secret"]));
+                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                var tokeOptions = new JwtSecurityToken(
+                    issuer: ConfigurationManager.AppSetting["JWT:ValidIssuer"],
+                    audience: ConfigurationManager.AppSetting["JWT:ValidAudience"],
+                    claims: new List<Claim>() {
+                new Claim(ClaimTypes.Name, newUser.Email),
+                new Claim(ClaimTypes.Role, newUser.Role),
                 new Claim("Role", newUser.Role),
                  new Claim("Email", newUser.Email)
->>>>>>> ea35ce5960c1815adadb8bbbfe0950c82abaae42
                     },
                     expires: DateTime.Now.AddMinutes(6),
                     signingCredentials: signinCredentials
@@ -135,8 +191,8 @@ namespace WebBuilderBackend.Controllers
         }
 
     }
-<<<<<<< HEAD
-}
-=======
  }
->>>>>>> ea35ce5960c1815adadb8bbbfe0950c82abaae42
+=========
+    }
+}
+>>>>>>>>> Temporary merge branch 2

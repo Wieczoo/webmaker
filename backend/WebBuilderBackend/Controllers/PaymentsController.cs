@@ -79,6 +79,15 @@ namespace WebBuilderBackend.Controllers
             payment.status = updatedPayment.status;
             payment.elementId = updatedPayment.elementId;
             payment.buyerEmail = updatedPayment.buyerEmail;
+            if (updatedPayment.status == "CONFIRMED")
+            {
+                Users user = _context.Users.FirstOrDefault(p => p.Email == updatedPayment.buyerEmail);
+                user.premium = true;
+            }
+            else {
+                Users user = _context.Users.FirstOrDefault(p => p.Email == updatedPayment.buyerEmail);
+                user.premium = false;
+            }
             _context.SaveChanges();
             // Zwrócenie zaktualizowanej płatności
             return Ok(payment);
@@ -99,7 +108,7 @@ namespace WebBuilderBackend.Controllers
 
             // Usunięcie płatności z listy
             _context.Payments.Remove(payment);
-
+            _context.SaveChanges();
             // Zwrócenie potwierdzenia usunięcia
             return NoContent();
         }
