@@ -13,6 +13,7 @@ namespace WebBuilderBackend.Tests
     {
         private ApiContext _context;
         private UsersController _controller;
+        private AuthenticationController _controllerA;
 
         public UsersControllerTests()
         {
@@ -20,6 +21,7 @@ namespace WebBuilderBackend.Tests
 
             _context = new ApiContext(options);
             _controller = new UsersController(_context);
+            _controllerA = new AuthenticationController(_context);
         }
 
         [Fact]
@@ -28,7 +30,7 @@ namespace WebBuilderBackend.Tests
             // Arrange
             var existingUser = new Users
             {
-                Id = 1,
+                Id = 100,
                 Email = "existing@example.com",
                 // Set other properties as needed
             };
@@ -81,5 +83,85 @@ namespace WebBuilderBackend.Tests
             Assert.Equal(null, jsonResult.StatusCode);
             Assert.IsType<OkObjectResult>(jsonResult.Value);
         }
+
+
+        //////////////////////////////////////////
+
+        
+
+        [Fact]
+        public void Login_WithInvalidCredentials_ReturnsUnauthorizedResult()
+        {
+            // Arrange
+            var login = new Login
+            {
+                Email = "test@example.com",
+                Password = "incorrectpassword"
+            };
+
+            // Act
+            var result = _controllerA.Login(login) as UnauthorizedResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(401, result.StatusCode);
+        }
+
+        [Fact]
+        public void Login_WithInvalidRequest_ReturnsBadRequestResult()
+        {
+            // Arrange
+            Login login = null;
+
+            // Act
+            var result = _controllerA.Login(login) as BadRequestObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(400, result.StatusCode);
+            Assert.Equal("Invalid user request!!!", result.Value);
+        }
+
+        [Fact]
+        public void Users_WithValidUser_ReturnsOkResultWithToken()
+        {
+            // Arrange
+            var user = new Users
+            {
+                Email = "test@example.com",
+                Password = "password"
+            };
+
+            // Act
+            var result = _controllerA.Users(user) as OkObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(200, result.StatusCode);
+
+            var response = result.Value as JWTTokenResponse;
+            Assert.NotNull(response);
+            Assert.NotNull(response.Token);
+        }
+
+   
+
+        [Fact]
+        public void Users_WithInvalidRequest_ReturnsBadRequestResult()
+        {
+            // Arrange
+            Users user = null;
+
+            // Act
+            var result = _controllerA.Users(user) as BadRequestObjectResult;
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(400, result.StatusCode);
+            Assert.Equal("Invalid user request!!!", result.Value);
+        }
+
+
+
     }
 }

@@ -91,6 +91,11 @@ namespace WebBuilderBackend.Controllers
             _context.SaveChanges();
             return new JsonResult(NoContent());
         }
+
+        public static implicit operator UsersController(PaymentsController v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
