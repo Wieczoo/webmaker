@@ -33,7 +33,8 @@ namespace WebBuilderBackend.Controllers
             {
                 return BadRequest("Invalid user request!!!");
             }
-            else {
+            else
+            {
                 Users user = _context.Users.SingleOrDefault(user => user.Email == login.Email);
                 if (login.Email == user.Email && login.Password == user.Password)
                 {
@@ -57,7 +58,7 @@ namespace WebBuilderBackend.Controllers
                 }
                 return Unauthorized();
             }
-            
+
         }
 
         [HttpPost("Users")]
@@ -85,8 +86,10 @@ namespace WebBuilderBackend.Controllers
                         claims: new List<Claim>() {
                     new Claim(ClaimTypes.Name, user.Email),
                     new Claim(ClaimTypes.Role, existingUser.Role),
+
                     new Claim("Role", existingUser.Role),
                  new Claim("Email", existingUser.Email)
+
                         },
                         expires: DateTime.Now.AddMinutes(6),
                         signingCredentials: signinCredentials
@@ -112,8 +115,11 @@ namespace WebBuilderBackend.Controllers
                     claims: new List<Claim>() {
                 new Claim(ClaimTypes.Name, newUser.Email),
                 new Claim(ClaimTypes.Role, newUser.Role),
+
                 new Claim("Role", newUser.Role),
                  new Claim("Email", newUser.Email)
+
+
                     },
                     expires: DateTime.Now.AddMinutes(6),
                     signingCredentials: signinCredentials
@@ -126,4 +132,6 @@ namespace WebBuilderBackend.Controllers
         }
 
     }
+
  }
+

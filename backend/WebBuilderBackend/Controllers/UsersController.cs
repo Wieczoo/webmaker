@@ -52,11 +52,20 @@ namespace WebBuilderBackend.Controllers
         }
 
         //// GET api/values/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        [HttpGet("{email}")]
+        public IActionResult Get(string email)
+        {
+            var result = _context.Users.FirstOrDefault(p => p.Email == email);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(result);
+            }
+        }
+
 
         //// POST api/values
         //[HttpPost]

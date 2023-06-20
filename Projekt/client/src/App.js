@@ -15,6 +15,11 @@ import PagesPage from "./pages/PagesPage";
 import ApperancePage from "./pages/ApperancePage";
 import ProfilePage from "./pages/ProfilePage";
 import Payment from "./pages/Payment";
+import AdminPanel from './pages/AdminPanel';
+import PagePreview from "./pages/PreviewPage";
+
+
+import PageEditor from "./pages/PageEditorBeta";
 
 const App = () =>{
     return(
@@ -23,6 +28,7 @@ const App = () =>{
                 <Router>
                     <Routes>
                         <Route path="/" element={<LoginPage/>}/>
+                        <Route path="preview" element={<PagePreview/>}/>
                         <Route path="register" element={<RegisterPage/>}/>
                         <Route path="dashboard" element={<Layout/>}>
                             <Route path="home" element ={<HomePage/>}/>
@@ -31,6 +37,8 @@ const App = () =>{
                             <Route path="editor" element ={<ApperancePage/>}/>
                             <Route path="profile" element ={<ProfilePage/>}/>
                             <Route path="payment" element ={<Payment/>}/>
+                            <Route path="beta" element ={<PageEditor/>}/>
+                            <Route path="admin" element ={<AdminPanel/>}/>
                         </Route>
                     </Routes>
                 </Router>

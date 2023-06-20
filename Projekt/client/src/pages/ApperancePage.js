@@ -14,6 +14,7 @@ import Sidebar from '../components/Sidebar';
 import Section from '../components/Section';
 import EditableComponent from '../components/EditableComponent';
 import OptionsBar from '../components/OptionsBar';
+import exportToHTML from "../components/ExportToHTML";
 
 
 const ApperancePage = () => {
@@ -167,6 +168,12 @@ const ApperancePage = () => {
     }
   };
 
+  const handleExportToHTML = () => {
+    const htmlCode = exportToHTML(sections);
+    console.log(htmlCode);
+    // Możesz wykorzystać htmlCode do zapisania jako plik lub przekazania go dalej w aplikacji
+  };
+
   return (
     <>
       {!newPageBlock ? null :
@@ -212,8 +219,11 @@ const ApperancePage = () => {
                 {pages ? pages.map((item, index) => {
                   return (
                     <button key={index} onClick={() => { openPage(item.title) }} className="page"><img alt='page' src={icon_page} /><a>{item.title}</a></button>
+                    
                   );
                 }) : null}
+                <button onClick={handleExportToHTML}>Eksport do HTML</button>
+
               </div>
             </div>
           }
