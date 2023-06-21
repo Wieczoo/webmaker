@@ -10,7 +10,7 @@ const PaymentsPage = () => {
 
   const fetchPayments = async () => {
     try {
-      const response = await axios.get('https://localhost:7298/api/payments');
+      const response = await axios.get(window.$url+'/payments');
       debugger;
       setPayments(response.data.value);
     } catch (error) {
@@ -22,8 +22,8 @@ const PaymentsPage = () => {
     try {
         let paymentData = JSON.parse(localStorage.getItem('paymentData'));
         paymentData.status = newStatus;
-        axios.put("https://localhost:7298/api/payments/"+paymentId, paymentData)
-      await axios.put(`https://localhost:7298/api/payments/${paymentId}`, paymentData);
+        axios.put(window.$url+"/payments/"+paymentId, paymentData)
+      await axios.put(window.$url+`/payments/${paymentId}`, paymentData);
       fetchPayments();
     } catch (error) {
       console.error('Error updating payment status:', error);
@@ -32,7 +32,7 @@ const PaymentsPage = () => {
 
   const remove = async(paymentId)=>{
     try {
-        await axios.delete(`https://localhost:7298/api/payments/${paymentId}`);
+        await axios.delete(window.$url+`/payments/${paymentId}`);
         fetchPayments();
       } catch (error) {
         console.error('Error updating payment status:', error);

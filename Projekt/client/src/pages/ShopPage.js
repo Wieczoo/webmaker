@@ -13,7 +13,7 @@ const ShopPage = () =>{
     const paymentHandler = () => {
         const externalId = createExternalId()
         localStorage.setItem('lastExternalId',externalId)
-        axios.post("https://localhost:7298/api/hash",{
+        axios.post(window.$url+"/hash",{
             "amount": "12345",
             "externalId": externalId,
             "description": "Payment description",
@@ -30,14 +30,14 @@ const ShopPage = () =>{
            "buyerEmail": localStorage.getItem('email')
            }
            localStorage.setItem('paymentData',JSON.stringify(data))
-            axios.post('https://localhost:7298/api/payments',data).then(response => {
+            axios.post(window.$url+'/payments',data).then(response => {
             window.location.href = url;
           })
           
     })}
 
     useEffect(()=>{
-      axios.get('https://localhost:7298/api/Users/'+ localStorage.getItem('email')).then(response => {
+      axios.get(window.$url+'/Users/'+ localStorage.getItem('email')).then(response => {
         setPremium(response.data.premium)
       })
     },[])

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const AdminPages = () => {
     const [data,setData] = useState([]);
     const GetData = () => {
-        axios.get("https://localhost:7298/api/Export/Allfiles")
+        axios.get(window.$url+"/Export/Allfiles")
         .then(response => {
             setData(response.data);
         })
@@ -20,7 +20,7 @@ const AdminPages = () => {
 
     const handleDeletePage = (pageName) => {
 
-          axios.delete("https://localhost:7298/api/Export/delete",{
+          axios.delete(window.$url+"/Export/delete",{
             data:  {
             email: localStorage.getItem('email'),
             name: pageName
@@ -41,7 +41,7 @@ const AdminPages = () => {
                 
                 <div>
             <span>{file}</span>
-            <Link target='_blank' to={"https://localhost:7298/"+page.dirname+"/"+file }><span>Zobacz</span></Link>
+            <Link target='_blank' to={window.$remotehost+page.dirname+"/"+file }><span>Zobacz</span></Link>
             <span onClick={() => handleDeletePage(page)}>Usuń</span>
         </div>
               ))}

@@ -17,7 +17,7 @@ const LoginPage = () =>
     const navigate = useNavigate();
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
-    const API_URL = "https://localhost:7298/api/Authentication/login";
+    const API_URL = window.$url+"/Authentication/login";
 
     const login = ()=> {
         console.log("NET:")
@@ -46,7 +46,7 @@ const LoginPage = () =>
     }
     
 
-//https://localhost:7298/api/Authentication/Users
+
     function handleCallbackResponse(response){
         //console.log("Token:" + response.credential)
         
@@ -54,7 +54,7 @@ const LoginPage = () =>
         const decodeToken = jwt_decode(response.credential,{header: false});
        
         console.log(decodeToken)
-        axios.post("https://localhost:7298/api/Authentication/Users",{
+        axios.post(window.$url+"/api/Authentication/Users",{
             Id: 0,
             Email: decodeToken.email,
             Password: null,

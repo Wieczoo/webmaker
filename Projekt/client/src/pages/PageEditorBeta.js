@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/editorBeta.css';
 
@@ -10,6 +10,7 @@ import icon_close from '../assets/close.png';
 import icon_addPage from '../assets/addPage.png';
 import icon_image from '../assets/image.png';
 import icon_button from '../assets/button.png';
+import exportToHTML from '../components/ExportToHTML';
 import { Navigate } from 'react-router-dom';
 
 const PageEditor = () => {
@@ -119,6 +120,13 @@ const navigate = useNavigate();
     setNewPageBlock(false);
   };
 
+  useEffect(()=>{
+    const localStoragePage = localStorage.getItem('pages')
+    if(localStoragePage != undefined){
+        setPages(JSON.parse(localStoragePage));
+    }
+  },[])
+
   const handleStyleChange = (event, styleName) => {
     const { value } = event.target;
     let elementsTmp;
@@ -183,10 +191,10 @@ const navigate = useNavigate();
     }));
     setSelectedElementId(temp.id);
     setSelectedTextId(null);
-    // let tempPages = pages;
-    // let source  = pages.findIndex((e)=>e.title===selectedPage.title);
-    // tempPages[source].elements.push(temp);
-    //setPages(tempPages);
+    let tempPages = pages;
+    let source  = pages.findIndex((e)=>e.title===selectedPage.title);
+    tempPages[source] = selectedPage;
+    setPages(tempPages);
   };
 // dodawanie tekstu
   const putText = () => {
@@ -217,22 +225,38 @@ const navigate = useNavigate();
 
     setSelectedTextId(temp.id); 
     setPages(pages);
+    let tempPages = pages;
+    let source  = pages.findIndex((e)=>e.title===selectedPage.title);
+    tempPages[source] = selectedPage;
+    setPages(tempPages);
   };
 
   const handleTextChange = (event) => {
-    const { value } = event.target;
-  
+    const  value  = event.target.textContent;
+    debugger;
     setSelectedPage((prevPage) => {
-      const updatedElements = prevPage.elements.map((element) => {
-        if (element.type === 'text' && element.id === selectedTextId) {
+      const updatedElements = prevPage.elements.map((element) => {   
+         if (element.elements.length > 0 && element.elements[0].id === selectedElementId) {
+          const updatedNestedElements = element.elements.map((nestedElement) => {
+            if (nestedElement.id === selectedElementId) {
+              if (nestedElement.type === 'text') {
+                return {
+                  ...nestedElement,
+                  text: value
+                };
+              }
+            }
+            return nestedElement;
+          });
+    
           return {
             ...element,
-            text: value
+            elements: updatedNestedElements
           };
         }
         return element;
       });
-  
+    
       return {
         ...prevPage,
         elements: updatedElements
@@ -355,33 +379,48 @@ const navigate = useNavigate();
       return null;
     });
   };
-const deleteObject = (idx) =>{
-    console.log(idx);
-    
+const deleteObject = (element,index,upperindex =null) =>{
+    console.log(element);
+    console.log(index);
+    console.log(upperindex);
+    console.log(selectedPage.elements);
+    if(upperindex != null){
+        const updatedSections = [...selectedPage.elements];
+        updatedSections[upperindex].elements.splice(index, 1);
+        setSelectedPage({
+            title: newPageTitle,
+            type: 'body',
+            id: '',
+            class: '',
+            styles: { background: '#fff' },
+            elements: updatedSections
+          });
+    } else {
 
-    let tempArr = pages;
-
-    let source  = pages.findIndex((e)=>e.title===selectedPage.title);
-
-
-    switch (idx.type)
-    {
-        case 'div':
-            let sourceDiv  = tempArr[source].elements.findIndex((e)=>e.id===idx.id);
-
-            const x = tempArr.splice(sourceDiv,1);
-            setPages(tempArr);
-
-            break;
-            default:
-                break;
     }
+    // let tempArr = pages;
+
+    // let source  = pages.findIndex((e)=>e.title===selectedPage.title);
+
+
+    // switch (idx.type)
+    // {
+    //     case 'div':
+    //         let sourceDiv  = tempArr[source].elements.findIndex((e)=>e.id===idx.id);
+
+    //         const x = tempArr.splice(sourceDiv,1);
+    //         setPages(tempArr);
+
+    //         break;
+    //         default:
+    //             break;
+    // }
 }
-const renderEditorElements = (elements) => {
+const renderEditorElements = (elements,upperindex = null) => {
   return (
     <div id="pagePreviewBody">
       <div className="editorElementContainer">
-        {elements.map((element) => {
+        {elements.map((element,index) => {
           if (element.type === 'div') {
             return (
               <div
@@ -392,8 +431,8 @@ const renderEditorElements = (elements) => {
                   setSelectedTextId(null);
                 }}
               >
-                <div className="elementTag"><a>Div</a><button onClick={()=>{deleteObject(element)}}><img alt='delete' src={icon_trash}></img></button></div>
-                {element.elements && element.elements.length > 0 && renderEditorElements(element.elements)}
+                <div className="elementTag"><a>Div</a><button onClick={()=>{deleteObject(element,index)}}><img alt='delete' src={icon_trash}></img></button></div>
+                {element.elements && element.elements.length > 0 && renderEditorElements(element.elements,index)}
               </div>
             );
           } else if (element.type === 'text') {
@@ -403,7 +442,7 @@ const renderEditorElements = (elements) => {
                 className={`editorText`}
               >
                 <div className={`editorTextContent ${element.id === selectedTextId ? 'selectedElement' : ''}`} onClick={() => setSelectedTextId(element.id)}>
-                  <div className="elementTag"><a>--text</a><button onClick={()=>{deleteObject(element)}}><img alt='delete' src={icon_trash}></img></button></div>
+                  <div className="elementTag"><a>--text</a><button onClick={()=>{deleteObject(element,index,upperindex)}}><img alt='delete' src={icon_trash}></img></button></div>
                 </div>
               </div>
             );
@@ -415,7 +454,7 @@ const renderEditorElements = (elements) => {
                 className={`editorText`}
               >
                 <div className={`editorTextContent ${element.id === selectedTextId ? 'selectedElement' : ''}`} onClick={() => setSelectedTextId(element.id)}>
-                  <div className="elementTag"><a>--image</a><button onClick={()=>{deleteObject(element)}}><img alt='delete' src={icon_trash}></img></button></div>
+                  <div className="elementTag"><a>--image</a><button onClick={()=>{deleteObject(element,index,upperindex)}}><img alt='delete' src={icon_trash}></img></button></div>
                 </div>
               </div>
             );
@@ -427,7 +466,7 @@ const renderEditorElements = (elements) => {
                 className={`editorText`}
               >
                 <div className={`editorTextContent ${element.id === selectedTextId ? 'selectedElement' : ''}`} onClick={() => setSelectedTextId(element.id)}>
-                  <div className="elementTag"><a>--button</a><button onClick={()=>{deleteObject(element)}}><img alt='delete' src={icon_trash}></img></button></div>
+                  <div className="elementTag"><a>--button</a><button onClick={()=>{deleteObject(element,index,upperindex)}}><img alt='delete' src={icon_trash}></img></button></div>
                 </div>
               </div>
             );
@@ -450,7 +489,7 @@ const addPageView = () =>{
             </div>
             <div id="modalBoxBody">
               <label>Title</label>
-              <input data-testid='input_add_title' type='text' onChange={(e) => { setNewPageTitle(e.target.value) }} />
+              <input type='text' onChange={(e) => { setNewPageTitle(e.target.value) }} />
               <button onClick={addPage}>Add page</button>
             </div>
           </div>
@@ -486,6 +525,10 @@ const putImage = () =>{
       });
   
       setPages(pages);
+      let tempPages = pages;
+    let source  = pages.findIndex((e)=>e.title===selectedPage.title);
+    tempPages[source] = selectedPage;
+    setPages(tempPages);
 }
   const putButton = () =>{
     const temp = {
@@ -513,6 +556,10 @@ const putImage = () =>{
       });
   
       setPages(pages);
+      let tempPages = pages;
+    let source  = pages.findIndex((e)=>e.title===selectedPage.title);
+    tempPages[source] = selectedPage;
+    setPages(tempPages);
 }
 const redirectToPreview = () =>{
     // navigate('../../../preview',{ state: { target: "_blank" } });
@@ -524,6 +571,16 @@ const redirectToPreview = () =>{
 
 
 }
+
+
+
+const handleExportToHTML = () => {
+    localStorage.setItem('pages',JSON.stringify(pages));
+    const htmlCode = exportToHTML(pages);
+
+   
+  };
+  
   return (
     <>
     {newPageBlock? addPageView():null}
@@ -542,13 +599,13 @@ const redirectToPreview = () =>{
   {!editorSelectorView ? (
     <div className="section">
       <h3>My pages
-        <button data-testid='add_button' onClick={() => {setNewPageBlock(true);console.log(newPageBlock)}}><img alt='add' src={icon_addPage} /></button>
+        <button onClick={() => {setNewPageBlock(true);console.log(newPageBlock)}}><img alt='add' src={icon_addPage} /></button>
       </h3>
-    
+      
       {pages !== null ? (
         pages.map((item, index) => (
             <div key={index} className='pageList'>
-                <button data-testid='new_page_test'  onClick={() => openPage(item)}>
+                <button  onClick={() => openPage(item)}>
                     {item.title}
                 </button>
                 <button className='pageOption' onClick={redirectToPreview}>
@@ -557,11 +614,13 @@ const redirectToPreview = () =>{
                 <button className='pageOption'>
                     <img alt='delete' src={icon_trash}></img>
                 </button>
-            </div>
+            </div> 
         ))
       ) : (
         null
       )}
+       
+      <button onClick={handleExportToHTML}>Eksport do HTML</button>
     </div>
   ) : (
     <>

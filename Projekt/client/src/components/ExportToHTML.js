@@ -1,61 +1,21 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import axios from 'axios';
+
+function encodeHtmlToBase64(html) {
+    
+  const htmlBytes = new TextEncoder().encode(html);
+
+  
+  const base64 = btoa(String.fromCharCode.apply(null, htmlBytes));
+
+  return base64;
+}
 
 const exportToHTML = (pages) => {
-//   const htmlSections = sections.map((section, sectionIndex) => {
-    
-//     const sectionComponents = section.components.map((component, componentIndex) => {
-//       if (component.type === 'Header') {
-//         return (
-//             ReactDOMServer.renderToString(<h1 key={componentIndex} style={component.style}>
-//             {component.value}
-//           </h1>).replace('\'', '')
-         
-//         );
-//       } else if (component.type === 'Paragraph') {
-//         return (
-//             ReactDOMServer.renderToStaticMarkup(<p key={componentIndex} style={component.style}>
-//             {component.value}
-//           </p>).replace('\'', '')
-//         );
-//       } else if (component.type === 'Image') {
-//         return (
-//             ReactDOMServer.renderToStaticMarkup(<img
-//             key={componentIndex}
-//             src={component.imageUrl}
-//             alt="Image"
-//             style={component.style}
-//           />).replace('\'', '')
-//         );
-//       } else {
-//         return null;
-//       }
-//     });
-    
-
-//     return (
-//         ReactDOMServer.renderToString(<div key={sectionIndex} style={{ display: section.layout === 'column' ? 'flex' : 'block' }}>
-//         </div>).replace('></', ">" + sectionComponents.join('') + "</" )
-//     );
-//   });
-// debugger;
-//   const htmlString = `
-//     <!DOCTYPE html>
-//     <html>
-//       <head>
-//         <title>My Website</title>
-//         <style>
-//           /* Add any additional CSS styles here */
-//         </style>
-//       </head>
-//       <body>
-//         ${htmlSections.join('')}
-//       </body>
-//     </html>
-//   `;
  let htmlString = [];
 const htmlPages = pages.map((page, pageIndex) => {
-  //console.log(page)
+
   
   const sectionComponents = page.elements.map((component, componentIndex) => {
     
@@ -112,7 +72,6 @@ const htmlPages = pages.map((page, pageIndex) => {
   });
 htmlString.push( sectionComponents.join(''))
 })
-debugger;
 const pagesHtml = htmlString.map((content)=>{
  return(  `
     <!DOCTYPE html>
@@ -120,7 +79,10 @@ const pagesHtml = htmlString.map((content)=>{
       <head>
         <title>My Website</title>
         <style>
-          /* Add any additional CSS styles here */
+          *{
+            padding:0;
+            margin:0;
+          }
         </style>
       </head>
       <body style="
@@ -135,6 +97,34 @@ const pagesHtml = htmlString.map((content)=>{
   `)
 })
  
-  return pagesHtml;
+ // return pagesHtml;
+
+  const names = pages.map((page)=>{return(
+    page.title
+)})
+const baseHtml = pagesHtml.map((code)=>{
+    return (
+        encodeHtmlToBase64(code)
+    )
+});
+const exportData = {
+Email: localStorage.getItem('email'),
+Name: names,
+Html: baseHtml
+};
+
+// Wykonanie zapytania POST
+axios.post( window.$url+'/Export/add', exportData)
+.then(response =>{
+if(response.data == 'Add onepage'){
+    alert("Kup premium zeby zapisywać więcej niz jedną stronę")
+} else if(response.data == 'Files exported successfully') {
+    alert("Pliki zostały zapisane na serwerze")
+}
+  console.log(response.data); 
+})
+.catch(error => {
+  console.error(error); 
+});
 };
 export default exportToHTML;
